@@ -41,7 +41,7 @@ function formatDate(date) {
 
 function searchCity(city) {
   let apiKey = "38a37b7f968a5o1f64a7f0dbaftb8064";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=Phuthaditjhaba&key=38a37b7f968a5o1f64a7f0dbaftb8064&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(refreshWeather);
 }
 
