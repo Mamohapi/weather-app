@@ -16,7 +16,10 @@ function refreshWeather(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   temperatureElement.innerHTML = Math.round(temperature);
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+
+  getForecast(response.data.city);
 }
+
 
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -52,12 +55,20 @@ function handleSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
-function displayforecast() {
+function getForecast(city) {
+  let apiKey = "38a37b7f968a5o1f64a7f0dbaftb8064";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayforecast);
+}
+
+function displayforecast(response) {
+  console.log(response.data);
+
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
   days.forEach(function (day) {
-    forecastHtml = 
+    forecastHtml =
       forecastHtml +
       `
       <div class="weather-forecast-day">
@@ -81,4 +92,4 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Phuthaditjhaba");
-displayforecast();
+getForecast("Phuthaditjhaba");
